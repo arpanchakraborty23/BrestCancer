@@ -2,7 +2,7 @@ from datetime import datetime
 import os,sys
 import logging
 
-LOG_FILE=f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}.log"
+LOG_FILE=f"{datetime.now().strftime('%Y-%m-%d %H-%M-%S')}.log"
 logs_path = os.path.join(os.getcwd(), "logs", LOG_FILE)
 
 os.makedirs(logs_path, exist_ok=True)
