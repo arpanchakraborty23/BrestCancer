@@ -29,5 +29,5 @@ setup(
     long_description_content='text/markdown',
     url=f"https//:github.com/{Author}/{Repo_name}",
     packages=find_packages(),
-    install_requries=get_requirements('reuirements.txt')
+    install_requries=get_requirements('requirements.txt')
 )
