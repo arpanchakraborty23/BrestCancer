@@ -35,10 +35,10 @@ class Dataungestion:
         try:
             logging.info('data ingestion has started')
 
-            df=data_from_db(database=db,collection=collection)
-            # data=load_breast_cancer()
-            # df=pd.DataFrame(data.data,columns=data.feature_names)
-            # df['outcome']=data.target
+            # df=data_from_db(database=db,collection=collection)
+            data=load_breast_cancer()
+            df=pd.DataFrame(data.data,columns=data.feature_names)
+            df['outcome']=data.target
 
             logging.info(f'data read completed from db {df.head()}')
 
@@ -64,12 +64,3 @@ class Dataungestion:
             logging.info(f'Error occured {str(e)}')
             raise CustomException(sys,e)    
         
-# if __name__=='__main__':
-#     obj=Dataungestion()
-#     train_path,test_path=obj.initiate_data_ingestion()        
-
-#     transform_obj=DataTransformation()
-#     train_arr,test_arr,_=transform_obj.initiate_data_transformation(train_path,test_path)
-
-#     model=ModelTrain()
-#     print(model.initiate_model_train(train_arr,test_arr))

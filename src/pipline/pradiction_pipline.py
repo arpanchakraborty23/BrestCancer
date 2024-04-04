@@ -83,7 +83,7 @@ class Prediction:
            
             input_df =  input_df.drop(columns=Target_col,axis=1) if Target_col in input_df.columns else input_df
             
-            insert_data_db(database=db,collection=collection,df=input_df)
+            # insert_data_db(database=db,collection=collection,df=input_df)
 
             
             #prediction
@@ -99,8 +99,8 @@ class Prediction:
             input_df.to_csv(self.prediction_config.prediction_file_path, index= False)
             logging.info('prediction completed')
 
-            # insert_data_db(database=db,collection=collection,df=input_df)
-            logging.info(f'prediction df : {insert_data_db(database=db,collection=prediction_csv,df=input_df)}')
+           
+            # logging.info(f'prediction df : {insert_data_db(database=db,collection=prediction_csv,df=input_df)}')
 
 
         except Exception as e:
@@ -113,8 +113,6 @@ class Prediction:
             input__csv_file=self.save_input_files()
             #data collection input file
 
-            # insert_data_db(db,collection,input__csv_file)
-           
 
             prediction=self.get_prediction_as_df(input_df_path=input__csv_file)
 
