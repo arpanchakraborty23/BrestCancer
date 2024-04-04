@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from src.logger import logging
 from src.exception import CustomException
 from src.components.data_transformation import DataTransformation
+from src.components.model_train import ModelTrain
 from dataclasses import dataclass
 
 
@@ -52,9 +53,12 @@ class Dataungestion:
             logging.info(f'Error occured {str(e)}')
             raise CustomException(sys,e)    
         
-if __name__=='__main__':
-    obj=Dataungestion()
-    train_path,test_path=obj.initiate_data_ingestion()        
+# if __name__=='__main__':
+#     obj=Dataungestion()
+#     train_path,test_path=obj.initiate_data_ingestion()        
 
-    transform_obj=DataTransformation()
-    train_arr,test_arr=transform_obj.initiate_data_transformation(train_path,test_path)
+#     transform_obj=DataTransformation()
+#     train_arr,test_arr,_=transform_obj.initiate_data_transformation(train_path,test_path)
+
+#     model=ModelTrain()
+#     print(model.initiate_model_train(train_arr,test_arr))
