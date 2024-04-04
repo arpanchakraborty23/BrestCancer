@@ -6,7 +6,15 @@ from src.logger import logging
 from src.exception import CustomException
 from flask import request
 
-from src.utils.utils import load_obj
+from src.utils.utils import load_obj,insert_data_db
+from dotenv import load_dotenv
+load_dotenv()
+
+db=os.getenv('db_prediction')
+collection=os.getenv('input_csv')
+prediction_csv=os.getenv('prediction')
+
+
 from dataclasses import dataclass
 
 @dataclass
@@ -35,7 +43,8 @@ class Prediction:
 
             # save files
             input_csv_file.save(pred_file_path)
-
+           
+           
             logging.info('save files com 38')
 
             return pred_file_path
@@ -64,6 +73,7 @@ class Prediction:
     def get_prediction_as_df(self,input_df_path:pd.DataFrame):
         try:
             input_df=pd.read_csv(input_df_path)
+            
 
             Target_col='outcome'
 
@@ -72,8 +82,10 @@ class Prediction:
 
            
             input_df =  input_df.drop(columns=Target_col,axis=1) if Target_col in input_df.columns else input_df
+            
+            insert_data_db(database=db,collection=collection,df=input_df)
 
-
+            
             #prediction
             pred=self.predict(feature=input_df)
             # prediction col
@@ -87,7 +99,8 @@ class Prediction:
             input_df.to_csv(self.prediction_config.prediction_file_path, index= False)
             logging.info('prediction completed')
 
-
+            # insert_data_db(database=db,collection=collection,df=input_df)
+            logging.info(f'prediction df : {insert_data_db(database=db,collection=prediction_csv,df=input_df)}')
 
 
         except Exception as e:
@@ -100,7 +113,13 @@ class Prediction:
             input__csv_file=self.save_input_files()
             #data collection input file
 
+            # insert_data_db(db,collection,input__csv_file)
+           
+
             prediction=self.get_prediction_as_df(input_df_path=input__csv_file)
+
+            
+           
 
 
             return prediction

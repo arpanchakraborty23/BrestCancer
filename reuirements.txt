@@ -4,4 +4,8 @@ scikit-learn
 seaborn
 flask
 ipykernel
+pymongo
+python-dotenv
+mlflow
+dagshub
 -e .
